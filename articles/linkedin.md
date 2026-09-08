@@ -1,0 +1,117 @@
+# Working with LinkedIn
+
+``` r
+
+library(promoutils)
+library(dplyr)
+```
+
+This article will walk you through using the promoutils functions to
+schedule messages for Linkedin. First make sure you are authorized to
+work with the LinkedIn API:
+
+``` r
+
+keys_check()
+#> Key status
+#> ✔ slack: TRUE
+#> ✔ matomo: TRUE
+#> ✔ linkedin: TRUE
+#> ✔ linkedin_org: TRUE
+#> ✔ github: TRUE
+#> → Good to go!
+```
+
+If not, see the [Setting Up
+LinkedIn](https://docs.ropensci.org/promoutils/articles/article/linkedin_app)
+article.
+
+### Accessing the API
+
+Once you have set up your LinkedIn access, you can use the LinkedIn API
+to access the rOpenSci LinkedIn space using httr2 directly or via the
+promoutils helper functions.
+
+Most of the time we’ll be using the `ro_urn` object to define the
+‘author’ (i.e. rOpenSci) of our requests.
+
+For example, to get a list of recent posts by rOpenSci we can use
+
+``` r
+
+p <- li_posts_read(ro_urn)
+```
+
+We can print the most recent message with
+
+``` r
+
+p$elements[[1]]$commentary |> cat()
+#> 👋 Meet Philippe Massicotte! 🇨🇦
+#> 
+#> Research Assistant and maintainer of \{rnaturalearth\}, \{rnaturalearthdata\}, and \{gitignore\} for rOpenSci. The first two packages facilitate mapping by providing world vector maps and data. \{gitignore\} helps you to create useful .gitignore files for your project.
+#> 
+#> Find Philippe at:
+#>  🐘 \@philmassicotte\@fosstodon.org
+#> 💻 github.com/PMassicotte
+#> 🔗 https://lnkd.in/dw7nB-7y
+#> 
+#> {hashtag|\#|MaintainerMonth} {hashtag|\#|rOpenSci} {hashtag|\#|RStats}
+```
+
+To write a post you can use the
+[`li_posts_write()`](https://docs.ropensci.org/promoutils/reference/li_posts_write.md)
+function. Let’s do a dry run (which won’t actually post).
+
+``` r
+
+id <- li_posts_write(
+  author = ro_urn, # Post on behalf of rOpenSci
+  body = "Testing out the LinkedIn API via R and httr2!",
+  dry_run = TRUE
+)
+#> POST /rest/posts HTTP/1.1
+#> accept: */*
+#> accept-encoding: deflate, gzip, br, zstd
+#> content-length: 291
+#> content-type: application/json
+#> host: api.linkedin.com
+#> linkedin-version: 202510
+#> user-agent: httr2/1.2.2 r-curl/7.1.0 libcurl/8.5.0
+#> x-restli-protocol-version: 2.0.0
+#> 
+#> {
+#>   "author": "urn:li:organization:77132573",
+#>   "commentary": "Testing out the LinkedIn API via R and httr2!",
+#>   "visibility": "PUBLIC",
+#>   "distribution": {
+#>     "feedDistribution": "MAIN_FEED",
+#>     "targetEntities": [
+#> 
+#>     ],
+#>     "thirdPartyDistributionChannels": [
+#> 
+#>     ]
+#>   },
+#>   "lifecycleState": "PUBLISHED",
+#>   "isReshareDisabledByAuthor": false
+#> }
+```
+
+It’s a good idea to capture the returned `id` (URN) in case you want to
+remove the post later (but you can always get this with
+[`li_posts_read()`](https://docs.ropensci.org/promoutils/reference/li_posts_read.md)
+too).
+
+If you want to post from your personal account, you’ll need to use your
+personal ID (URN). You can fetch this with
+[`li_urn_me()`](https://docs.ropensci.org/promoutils/reference/li_urn_me.md).
+
+``` r
+
+li_urn_me()
+#> urn:li:person:Bxn4HyByQ5
+```
+
+To schedule messages we recommend using a GitHub action on a cron job
+(or similar).

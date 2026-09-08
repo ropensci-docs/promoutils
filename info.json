@@ -1,0 +1,13 @@
+{
+  "commit": {
+    "commit": "62e38eaee511fab9e9b83971f6262ade1804b7c5",
+    "author": "Steffi LaZerte <steffi@steffi.ca>",
+    "time": "2026-09-08T19:27:36Z",
+    "files": 14,
+    "merge": true,
+    "message": "Merge pull request #11 from ropensci-org/vignette-slack\n\nVignette with example for Slack"
+  },
+  "repo": "https://github.com/ropensci-org/promoutils",
+  "pkg": "promoutils",
+  "time": "2026-09-08T22:06:17Z"
+}
