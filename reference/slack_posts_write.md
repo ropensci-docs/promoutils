@@ -1,0 +1,80 @@
+# Write Slack message
+
+Write a Slack message for posting now or later.
+
+## Usage
+
+``` r
+slack_posts_write(
+  body,
+  when = "now",
+  tz = "America/Winnipeg",
+  channel = "#testing-api",
+  dry_run = FALSE
+)
+```
+
+## Arguments
+
+- body:
+
+  Character. Text of message to post.
+
+- when:
+
+  Character or Date/time. When to post message (timezone is ignored, see
+  `tz`).
+
+- tz:
+
+  Character. Timezone of `when`.
+
+- channel:
+
+  Character vector. Channel(s) to post message to.
+
+- dry_run:
+
+  Logical. Test run?
+
+## Value
+
+Success message
+
+## Details
+
+See
+https://docs.slack.dev/messaging/formatting-message-text#special-mentions
+https://docs.slack.dev/messaging/formatting-message-text#mentioning-users
+
+## References
+
+- https://docs.slack.dev/messaging/sending-and-scheduling-messages
+
+- https://docs.slack.dev/messaging/sending-and-scheduling-messages#scheduling
+
+## Examples
+
+``` r
+if (FALSE) { # interactive()
+slack_posts_write("testing on Tuesday")
+slack_posts_write("testing more and more", when = Sys.time() + 3600, tz = "Europe/Paris")
+slack_posts_write(
+  paste(
+  "Join us for Social Coworking and office hours next week!",
+  "",
+  ":grey_exclamation: Theme: TESTING",
+  ":hourglass_flowing_sand: When: TODAY!",
+  ":cookie: Hosted by: USER! and cohost HOST",
+  "",
+  "You can use this time for...",
+  "- General coworking", sep = "\n"), when = "now")
+
+# Dry runs
+slack_posts_write("testing on Tuesday", dry_run = TRUE)
+slack_posts_write(
+  "testing [this cool link](https://mycoolsite.com)",
+  dry_run = TRUE
+)
+}
+```

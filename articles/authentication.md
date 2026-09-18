@@ -1,0 +1,43 @@
+# Authentication for promoutils
+
+``` r
+
+library(promoutils)
+```
+
+promoutils accesses many APIs (GitHub, LinkedIn, Slack, Matomo), and API
+calls require authentication.
+
+To help you get started there are a series of helper functions for
+setting up this authentication.
+
+[`keys_check()`](https://docs.ropensci.org/promoutils/reference/keys_check.md)
+will help you see what keys/tokens promoutils has found.
+
+``` r
+
+keys_check()
+#> Key status
+#> ✔ slack: TRUE
+#> ✔ matomo: TRUE
+#> ✔ linkedin: TRUE
+#> ✔ linkedin_org: TRUE
+#> ✔ github: TRUE
+#> → Good to go!
+```
+
+[`keys_set()`](https://docs.ropensci.org/promoutils/reference/keys_set.md)
+will help you set the keys by listing a brief set of instructions and
+taking the keys/tokens as input when you’re ready.
+
+However, several APIs (LinkedIn and Slack) require you to setup an App
+with Oauth which is a bit more of an advanced setup.
+
+Slack needs to be set up for each user, and LinkedIn only once for the
+organization.
+
+As such these APIs have separate articles to walk you through this
+process:
+
+- [Slack](https://docs.ropensci.org/promoutils/articles/slack_app.md)
+- [LinkedIn](https://docs.ropensci.org/promoutils/articles/linkedin_app.md)

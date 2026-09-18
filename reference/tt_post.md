@@ -1,0 +1,177 @@
+# Create Throwback Thursday `socials_post_issue()` command
+
+Create Throwback Thursday
+[`socials_post_issue()`](https://docs.ropensci.org/promoutils/reference/socials_post_issue.md)
+command
+
+## Usage
+
+``` r
+tt_post(
+  date,
+  title,
+  url,
+  blurb = "<-- Interesting description/blurb mentioning the author -->",
+  dry_run = FALSE,
+  print = FALSE
+)
+```
+
+## Arguments
+
+- date:
+
+  YMD Character. Date of the original post.
+
+- title:
+
+  Character. Title of the original post.
+
+- url:
+
+  Character. URL to original blog post
+
+- blurb:
+
+  Character. Interesting bit to describe post (optional).
+
+- dry_run:
+
+  Logical. Whether to do a dry run (i.e. don't post).
+
+- print:
+
+  Logical. Whether to simply print the text to console instead of
+  copying to the clipboard.
+
+## Value
+
+Character string of R functions with relevant details (normally pasted
+into a POSTS_TT.R script file and tweaked as necessary before being
+executed).
+
+## Examples
+
+``` r
+# Standard
+tt_post(
+  "2019-05-14",
+  "POWER to the People",
+  "https://ropensci.org/blog/2019/05/14/nasapower/",
+  print = TRUE
+)
+#> 
+#> promoutils::socials_post_issue(
+#>   time = "2027-05-06 08:00:00", tz = "America/Vancouver",
+#>   where = "mastodon", dry_run = FALSE,
+#>   over_char_limit = cli::cli_warn,
+#>   title = "TT",
+#>   body = "[blog] Throw-back Thursday!
+#> 
+#> <-- Interesting description/blurb mentioning the author -->
+#> 
+#> :hourglass_flowing_sand: POWER to the People
+#> :calendar: May 14, 2019
+#> :link: https://ropensci.org/blog/2019/05/14/nasapower/
+#> ")
+#> 
+#> 
+#> promoutils::socials_post_issue(
+#>   time = "2027-05-06 08:00:00", tz = "America/Vancouver",
+#>   where = "linkedin", dry_run = FALSE,
+#>   over_char_limit = cli::cli_warn,
+#>   title = "TT",
+#>   body = "[blog] Throw-back Thursday!
+#> 
+#> <-- Interesting description/blurb mentioning the author -->
+#> 
+#> :hourglass_flowing_sand: POWER to the People
+#> :calendar: May 14, 2019
+#> :link: https://ropensci.org/blog/2019/05/14/nasapower/
+#> ")
+#> 
+
+# Double throwback
+tt_post(
+  c("2017-08-22", "2017-08-22"),
+  c("So you (don’t) think you can review a package",
+    "Onboarding visdat, a tool for preliminary visualisation of whole dataframes"
+  ),
+  url = c(
+    "https://ropensci.org/blog/2017/08/22/first-package-review/",
+    "https://ropensci.org/blog/2017/08/22/visdat/"
+  ),
+  print = TRUE
+)
+#> 
+#> promoutils::socials_post_issue(
+#>   time = "2027-08-05 08:00:00", tz = "America/Vancouver",
+#>   where = "mastodon", dry_run = FALSE,
+#>   over_char_limit = cli::cli_warn,
+#>   title = "TT",
+#>   body = "[blog] Throw-back Thursday!
+#> 
+#> <-- Interesting description/blurb mentioning the author -->
+#> 
+#> :hourglass_flowing_sand: So you (don’t) think you can review a package
+#> :calendar: August 22, 2017
+#> :link: https://ropensci.org/blog/2017/08/22/first-package-review/
+#> 
+#> :hourglass_flowing_sand: Onboarding visdat, a tool for preliminary visualisation of whole dataframes
+#> :calendar: August 22, 2017
+#> :link: https://ropensci.org/blog/2017/08/22/visdat/
+#> ")
+#> 
+#> 
+#> promoutils::socials_post_issue(
+#>   time = "2027-08-05 08:00:00", tz = "America/Vancouver",
+#>   where = "linkedin", dry_run = FALSE,
+#>   over_char_limit = cli::cli_warn,
+#>   title = "TT",
+#>   body = "[blog] Throw-back Thursday!
+#> 
+#> <-- Interesting description/blurb mentioning the author -->
+#> 
+#> :hourglass_flowing_sand: So you (don’t) think you can review a package
+#> :calendar: August 22, 2017
+#> :link: https://ropensci.org/blog/2017/08/22/first-package-review/
+#> 
+#> :hourglass_flowing_sand: Onboarding visdat, a tool for preliminary visualisation of whole dataframes
+#> :calendar: August 22, 2017
+#> :link: https://ropensci.org/blog/2017/08/22/visdat/
+#> ")
+#> 
+
+# Slug only
+tt_post("2019-05-14", "POWER to the People", "nasapower", print = TRUE)
+#> 
+#> promoutils::socials_post_issue(
+#>   time = "2027-05-06 08:00:00", tz = "America/Vancouver",
+#>   where = "mastodon", dry_run = FALSE,
+#>   over_char_limit = cli::cli_warn,
+#>   title = "TT",
+#>   body = "[blog] Throw-back Thursday!
+#> 
+#> <-- Interesting description/blurb mentioning the author -->
+#> 
+#> :hourglass_flowing_sand: POWER to the People
+#> :calendar: May 14, 2019
+#> :link: https://ropensci.org/blog/2019/05/14/nasapower/
+#> ")
+#> 
+#> 
+#> promoutils::socials_post_issue(
+#>   time = "2027-05-06 08:00:00", tz = "America/Vancouver",
+#>   where = "linkedin", dry_run = FALSE,
+#>   over_char_limit = cli::cli_warn,
+#>   title = "TT",
+#>   body = "[blog] Throw-back Thursday!
+#> 
+#> <-- Interesting description/blurb mentioning the author -->
+#> 
+#> :hourglass_flowing_sand: POWER to the People
+#> :calendar: May 14, 2019
+#> :link: https://ropensci.org/blog/2019/05/14/nasapower/
+#> ")
+#> 
+```

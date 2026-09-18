@@ -1,0 +1,13 @@
+{
+  "commit": {
+    "commit": "2af32fca3e96f3c76bdd99c06b27a75e0e1eef75",
+    "author": "Steffi LaZerte <sel@steffilazerte.ca>",
+    "time": "2026-09-18T20:20:05Z",
+    "files": 1,
+    "merge": true,
+    "message": "Merge pull request #12 from ropensci-org/yabellini-patch-slack\n\nFix link in Slack setup article reference"
+  },
+  "repo": "https://github.com/ropensci-org/promoutils",
+  "pkg": "promoutils",
+  "time": "2026-09-18T22:50:20Z"
+}
